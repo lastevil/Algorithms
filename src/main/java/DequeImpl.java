@@ -143,8 +143,8 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
             }
             if (size==1) {
                 index++;
-                curItem = first;
-                return (E) first.item;
+                curItem = tail;
+                return (E) curItem.item;
             }
             if (index==0){
                 curItem=tail;
