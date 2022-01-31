@@ -1,5 +1,4 @@
 import interfaces.LinkedList;
-
 import java.util.Iterator;
 
 public class SimpleLinkedListImpl<E> implements LinkedList<E>, Iterable<E> {

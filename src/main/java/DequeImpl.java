@@ -2,24 +2,23 @@ import interfaces.Deque;
 
 import java.util.Iterator;
 
-public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
-
+//import java.util.Iterator;
+public class DequeImpl<E> extends TwoSideLinkedListImpl<E> implements Deque<E> {
+    protected Node<E> first;
     protected Node<E> head;
-    protected Node<E> tail;
-
     @Override
     public boolean insertLeft(E value) {
         if (size == 0){
-            tail = new Node<>(value,null, null);
-            head = tail;
+            first = new Node<>(value,null, null);
+            head = first;
         }
         if (size == 1) {
-            tail = new Node<>(value, null, head);
-            head.prev=tail;
+            first = new Node<>(value, null, head);
+            head.prev= first;
         }
         else{
-            tail = new Node<>(value, null, tail);
-            (tail.next).prev=tail;
+            first = new Node<>(value, null, first);
+            (first.next).prev= first;
         }
         size++;
         return true;
@@ -29,11 +28,11 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
     public boolean insertRight(E value) {
         if (size == 0){
             head = new Node<>(value,null,null );
-            tail = head;
+            first = head;
         }
         if (size == 1) {
-            head = new Node<>(value, tail,null);
-            tail.next=head;
+            head = new Node<>(value, first,null);
+            first.next=head;
         }
         else{
             head = new Node<>(value, head,null);
@@ -48,9 +47,9 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
         if (isEmpty()) {
             return null;
         }
-        Node<E> removedNode = tail;
-        tail = removedNode.next;
-        tail.prev = null;
+        Node<E> removedNode = first;
+        first = removedNode.next;
+        first.prev = null;
         removedNode.next = null;
         size--;
         return removedNode.item;
@@ -71,14 +70,14 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
 
     @Override
     public E remove() {
-        Node<E> removedNode = tail;
+        Node<E> removedNode = first;
         removeLeft();
         return removedNode.item;
         }
 
     @Override
     public boolean contains(Object value) {
-        Node<E> current = tail;
+        Node<E> current = first;
         while (current != null) {
             if (current.item.equals(value)) {
                 return true;
@@ -90,7 +89,7 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
 
     @Override
     public E peekFront() {
-        return tail.item;
+        return first.item;
     }
 
     @Override
@@ -107,7 +106,7 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
     public String toString() {
         if (size>1){
         StringBuilder sb = new StringBuilder("[");
-        Node<E> current = tail;
+        Node<E> current = first;
 
         while (current != null) {
             sb.append(current.item);
@@ -118,16 +117,16 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
         }
         return sb.append("]").toString();
     }
-        else return "[ "+tail.item.toString() +" ]";
+        else return "[ "+ first.item.toString() +" ]";
     }
 
     @Override
     public Iterator<E> iterator() {
 
-        return new DeqIterator<E>(tail);
+        return new DeqIterator<E>(first);
     }
 
-    private class DeqIterator<E> implements Iterator<E> {
+  private class DeqIterator<E> implements Iterator<E> {
 
         private Node<E> curItem;
         int index;

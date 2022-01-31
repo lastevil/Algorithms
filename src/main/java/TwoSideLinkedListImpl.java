@@ -1,4 +1,7 @@
 import interfaces.TwoSideLinkedList;
+
+import java.util.Iterator;
+
 public class TwoSideLinkedListImpl<E> extends SimpleLinkedListImpl<E> implements TwoSideLinkedList<E> {
 
     protected Node<E> last;
