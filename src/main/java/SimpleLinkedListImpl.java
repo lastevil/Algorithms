@@ -113,36 +113,42 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E>, Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new ListIterator<E>();
+        return new ListIterator<E>(first);
     }
 
     private class ListIterator<E> implements Iterator<E> {
 
+        private Node<E> curItem;
+        int index;
+
+        public ListIterator(Node<E> curItem){
+            this.curItem=curItem;
+        }
+
         @Override
         public boolean hasNext() {
-            return indexNext<size;
+            if (curItem!=null){
+                if(curItem.next!=null){
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override
         public E next() {
-                if (size <= 0) {
-                    System.out.println("No elements");
-                    return null;
-                }
-                if (size==1) {
-                    indexNext++;
-                    currentItem = first;
-                    return (E) first.item;
-                }
-                if (indexNext==0){
-                    currentItem=first;
-                    indexNext ++;
-                    return (E) currentItem.item;
-                }
-                else
-                currentItem=currentItem.next;
-                indexNext ++;
-                return (E) currentItem.item;
+            if (curItem == null) {
+                System.out.println("No elements");
+                return null;
+            }
+            if (index==0){
+                index ++;
+                return (E) curItem.item;
+            }
+            else
+                curItem=curItem.next;
+            index ++;
+            return (E) curItem.item;
         }
     }
 }

@@ -2,7 +2,7 @@ import interfaces.TwoSideLinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        testLinkedList();
+        //testLinkedList();
         testHomeWork();
 
         }
@@ -62,10 +62,13 @@ public class Main {
             System.out.println(deque.contains(11));
             System.out.println(deque.contains(3));
             for (Object value : deque) {
-                System.out.println("value: " + value);
+                System.out.println("value - : " + value);
             }
-            for (int i =1; i< deque.size;i++){
+            System.out.println("1234");
+            System.out.println(deque.removeLeft());
 
+            for (Object value : deque) {
+                System.out.println("value -- : " + value);
             }
 
         }

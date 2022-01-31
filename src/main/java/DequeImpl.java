@@ -6,8 +6,6 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
 
     protected Node<E> head;
     protected Node<E> tail;
-    protected Node<E> curItem;
-    int index;
 
     @Override
     public boolean insertLeft(E value) {
@@ -125,35 +123,42 @@ public class DequeImpl<E> extends TwoSideLinkedListImpl implements Deque<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return new DeqIterator<E>();
+
+        return new DeqIterator<E>(tail);
     }
 
     private class DeqIterator<E> implements Iterator<E> {
 
+        private Node<E> curItem;
+        int index;
+
+       public DeqIterator(Node<E> curItem){
+            this.curItem=curItem;
+      }
+
         @Override
         public boolean hasNext() {
-            return index<size;
+            if (curItem!=null){
+                if(curItem.next!=null){
+                    return true;
+                }
+            }
+            return false;
         }
 
         @Override
         public E next() {
-            if (size <= 0) {
+            if (curItem == null) {
                 System.out.println("No elements");
                 return null;
             }
-            if (size==1) {
-                index++;
-                curItem = tail;
-                return (E) curItem.item;
-            }
             if (index==0){
-                curItem=tail;
                 index ++;
                 return (E) curItem.item;
             }
             else
                 curItem=curItem.next;
-            index ++;
+                index ++;
             return (E) curItem.item;
         }
     }
