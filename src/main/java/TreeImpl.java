@@ -282,6 +282,7 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
     }
 
     public boolean isBalanced(){
+        this.deep();
         if (root==null){
             return true;
         }
