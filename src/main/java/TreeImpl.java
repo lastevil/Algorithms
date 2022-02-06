@@ -87,9 +87,6 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
             //[1, 2, 3, 4, 5]  [7 8 9 10 11]
             removedNodeWithAllChildren(removed, parent);
         }
-        deepLeft=0;
-        deepRight=0;
-        this.deep();
         size--;
         return true;
     }
@@ -246,6 +243,8 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
     }
 
     public int deep(){
+        deepLeft=0;
+        deepRight=0;
         if (root==null){
             return 0;
         }
